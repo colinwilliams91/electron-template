@@ -1,0 +1,23 @@
+{
+  "name": "electron-tutorial",
+  "version": "1.0.0",
+  "description": "learning electron",
+  "keywords": [
+    "electron",
+    "game",
+    "js",
+    "ts",
+    "typescript"
+  ],
+  "license": "SEE LICENSE IN UNLICENSE.md",
+  "author": "colin williams",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "electron": "^40.2.1"
+  }
+}
