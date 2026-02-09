@@ -1,21 +1,22 @@
+const { app, BrowserWindow, ipcMain } = require("electron/main");
 const path = require("node:path");
-const { app, BrowserWindow } = require("electron/main");
 
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
-            preload: path.join(__dirname, "preload.js"),
+            preload: path.join(__dirname, "..", "bridge", "preload.js"),
             // devTools: false, // this must be set to false for production release
         }
     });
 
-    win.loadFile("index.html");
+    win.loadFile(path.join(__dirname, "..", "frontend", "index.html"));
 };
 
 app.whenReady()
     .then(() => {
+        ipcMain.handle("ping", () => "pong");
         createWindow();
 
         // On macOS it's common to re-create a window in the app when the

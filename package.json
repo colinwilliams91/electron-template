@@ -11,7 +11,7 @@
   ],
   "license": "SEE LICENSE IN UNLICENSE.md",
   "author": "colin williams",
-  "main": "main.js",
+  "main": "./backend/main.js",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
