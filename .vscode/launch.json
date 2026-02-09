@@ -14,7 +14,7 @@
       "request": "attach",
       "type": "chrome",
       "webRoot": "${workspaceFolder}",
-      "timeout": 20000 // 20 seconds, to allow Electron to start
+      "timeout": 30000 // 30 seconds, to allow Electron to start
     },
     {
       "name": "Main",

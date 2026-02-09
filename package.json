@@ -11,7 +11,6 @@
   ],
   "license": "SEE LICENSE IN UNLICENSE.md",
   "author": "colin williams",
-  "type": "module",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
