@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require("electron/main");
+const { handlers } = require("./handlers");
 const path = require("node:path");
 
 const createWindow = () => {
@@ -16,20 +17,22 @@ const createWindow = () => {
 
 app.whenReady()
     .then(() => {
-        ipcMain.handle("ping", () => "pong");
+        // IPC handler registration
+        ipcMain.handle("ping", handlers.ping);
+        ipcMain.handle("dark-mode:toggle", handlers.darkMode.toggle);
+        ipcMain.handle("dark-mode:isDarkMode", handlers.darkMode.isDarkMode);
+        ipcMain.handle("dark-mode:system", handlers.darkMode.system);
+
         createWindow();
 
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
-        app.on("activate", () => {
-            if (BrowserWindow.getAllWindows().length === 0) {
-                createWindow();
-            }
-        });
+        app.on("activate", () => handlers.app.activate(createWindow));
     }).catch((error) => {
-        console.error(`Failed to create window: ${error}`);
+        console.error(`Failed to create window - on ready exception: ${error}`);
 });
 
+// TODO: this should move to ./handlers.js too but I want to rewrite to TS first
 app.on("window-all-closed", () => {
     if (process.platform !== "darwin") {
         app.quit();
