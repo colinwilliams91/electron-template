@@ -13,17 +13,27 @@ const contextId = document.getElementById("context-id")
 contextId.innerText = api.processContextId();
 
 const pingButton = document.getElementById("ping-button");
-pingButton.addEventListener("click", () => {
-    func();
-});
+pingButton.addEventListener("click", pingHandler);
 
 const count = document.getElementById("count");
 count.innerText = `Ping count: 0`; // default state/text
 
-const func = async () => {
+document.getElementById('toggle-dark-mode').addEventListener('click', darkModeToggleHandler);
+
+async function pingHandler() {
     const response =  await api.ping();
     state.count += 1;
     count.innerText = `Ping count: ${state.count}`;
     console.log(`ping response: ${response}`);
-
 };
+
+async function darkModeToggleHandler() {
+    await window.darkMode.toggle();
+    const isDarkMode = await window.darkMode.isDarkMode();
+    document.getElementById('theme-source').innerHTML = isDarkMode ? 'Dark' : 'Light'
+};
+
+document.getElementById('reset-to-system').addEventListener('click', async () => {
+  await window.darkMode.setToSystem()
+  document.getElementById('theme-source').innerHTML = 'System'
+});
